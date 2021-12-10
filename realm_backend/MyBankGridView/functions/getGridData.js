@@ -76,6 +76,13 @@ const groupKeys = [
     48
 ]
 
+const sortModel = [
+  {
+    "sort": "DESC",
+    "colId": "accounts.balance"
+  }
+]
+
 const valueCols = [
     {
         "id": "accounts.balance",
@@ -89,10 +96,11 @@ const valueCols = [
 exports(
   {
     startRow: 0, 
-    endRow: 5,
+    endRow: 1,
     rowGroupCols,
     groupKeys, 
-    valueCols
+    valueCols,
+    sortModel
   }  
 )
 */
