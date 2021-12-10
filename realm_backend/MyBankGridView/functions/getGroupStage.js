@@ -1,46 +1,15 @@
-exports = ({rowGroupCols, groupKeys, valueCols}) => {
+exports = ({rowGroupCols, valueCols, groupToUse}) => {
   const split = require("lodash/split");
   const last = require("lodash/last");
   
-  // find out about the lowest level of grouping and take this to create
-  // group stage in aggregation pipeline
-  const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
   let project = {};
   let groupId = {};
-  let groupBody = {}; 
+  let groupBody = {};
+  let pipeline = [];
   
   if (groupToUse[0].id === "customerId") {
-    // Use special grouping on Customer-Level to have multiple fields attached
-    project = {
-      customerId: "$_id.customerId",
-      lastName: "$_id.lastName",
-      firstName: "$_id.firstName",
-      age: "$_id.age",
-      crmInformation: {
-        segmentation: "$_id.segmentation"
-      },
-      address: {
-        country: "$_id.country"
-      },
-      accounts: {
-        balance: "$balance"
-      }
-    }
-    
-    groupId = {
-      customerId: "$customerId",
-      lastName: "$lastName",
-      firstName: "$firstName",
-      age: "$age",
-      country: "$address.country",
-      segmentation: "$crmInformation.segmentation"
-    }
-    
-    groupBody = {
-      "balance": {
-        "$sum": "$accounts.balance"
-      }
-    }
+    pipeline.push({"$unset": "accounts"});
+    pipeline.push({"$set": {"accounts.balance": "$totalBalance"}});
   } else {
     project = convertDotPathToNestedObject(groupToUse[0].id, `$_id.${last(split(groupToUse[0].id, '.'))}`);
   
@@ -62,13 +31,10 @@ exports = ({rowGroupCols, groupKeys, valueCols}) => {
     
     // set group by objects
     groupId = {[last(split(groupToUse[0].id, '.'))]: `$${groupToUse[0].id}`};
+    pipeline.push({"$group": Object.assign({"_id": groupId}, groupBody)});
+    pipeline.push({"$set": project});
   }
 
-  const pipeline = [
-    {"$group": Object.assign({"_id": groupId}, groupBody)},
-    {"$set": project}
-  ];
-  
   return pipeline;
 };
 
@@ -83,6 +49,14 @@ function convertDotPathToNestedObject(path, value) {
 /*
 Testdata
 ========
+
+const groupToUse = [
+    {
+        "id": "customerId",
+        "displayName": "Customer",
+        "field": "customer"
+    }
+]
 
 const rowGroupCols= [
     {
@@ -102,23 +76,7 @@ const rowGroupCols= [
     }
 ]
 
-const groupKeys = [
-  31, "New Zealand"
-]
-
 const valueCols = [
-    {
-        "id": "lastName",
-        "aggFunc": "first",
-        "displayName": "Last Name",
-        "field": "lastName"
-    },
-    {
-        "id": "firstName",
-        "aggFunc": "first",
-        "displayName": "First Name",
-        "field": "firstName"
-    },
     {
         "id": "accounts.balance",
         "aggFunc": "sum",
@@ -127,6 +85,6 @@ const valueCols = [
     }
 ]
 
-exports({rowGroupCols, groupKeys, valueCols})
+exports({rowGroupCols, valueCols, groupToUse})
 
 */
