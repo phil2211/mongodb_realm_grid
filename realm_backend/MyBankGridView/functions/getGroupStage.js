@@ -1,6 +1,7 @@
-exports = ({rowGroupCols, valueCols, groupToUse}) => {
+exports = ({valueCols, groupToUse}) => {
   const split = require("lodash/split");
   const last = require("lodash/last");
+  const upperFirst = require("lodash/upperFirst");
   
   let project = {};
   let groupId = {};
@@ -12,21 +13,14 @@ exports = ({rowGroupCols, valueCols, groupToUse}) => {
     pipeline.push({"$set": {"accounts.balance": "$totalBalance"}});
   } else {
     project = convertDotPathToNestedObject(groupToUse[0].id, `$_id.${last(split(groupToUse[0].id, '.'))}`);
-  
-    // create all valueColums to calculate by the aggFunc set in Grid
-    // see GridOptions.js in client code
     groupBody = {};
     valueCols.forEach(element => {
-      if (groupToUse[0].id === "customerId" || element.aggFunc !== "first") {
-        // if we have expectation for nested return, we need to nest them again because
-        // group will return un-nested values
-        project = Object.assign(project, convertDotPathToNestedObject(element.id, `$${last(split(element.id, '.'))}`));
-        groupBody = Object.assign(
-          groupBody,
-          {
-            [element.field]: {[`$${element.aggFunc}`]: `$${element.id}`}
-          });
-      }
+      groupBody = Object.assign(
+        groupBody,
+        {
+          [`total${upperFirst(element.field)}`]: {[`$${element.aggFunc}`]: `$total${upperFirst(element.field)}`}
+        });
+      project = Object.assign(project, convertDotPathToNestedObject(element.id, `$total${upperFirst(element.field)}`));
     });
     
     // set group by objects
@@ -52,27 +46,9 @@ Testdata
 
 const groupToUse = [
     {
-        "id": "customerId",
-        "displayName": "Customer",
-        "field": "customer"
-    }
-]
-
-const rowGroupCols= [
-    {
-        "id": "age",
-        "displayName": "Age",
-        "field": "age"
-    },
-    {
-        "id": "country",
+        "id": "address.country",
         "displayName": "Country",
         "field": "country"
-    },
-    {
-        "id": "_id",
-        "displayName": "Customer",
-        "field": "customer"
     }
 ]
 
@@ -85,6 +61,6 @@ const valueCols = [
     }
 ]
 
-exports({rowGroupCols, valueCols, groupToUse})
+exports({valueCols, groupToUse})
 
 */
