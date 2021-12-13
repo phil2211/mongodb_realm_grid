@@ -38,7 +38,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   agg.push({
     $facet: {
       rows: [{"$skip": startRow}, {"$limit": endRow-startRow}],
-      //rowCount: [{$count: 'lastRow'}]
+      rowCount: [{$count: 'lastRow'}]
     }
   });
   
