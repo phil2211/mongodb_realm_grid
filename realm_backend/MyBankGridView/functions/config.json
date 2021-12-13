@@ -1,10 +1,5 @@
 [
     {
-        "name": "getGroupStagePrecompute",
-        "private": true,
-        "run_as_system": true
-    },
-    {
         "name": "getMatchStage",
         "private": true
     },
@@ -31,6 +26,11 @@
     },
     {
         "name": "getGroupStage",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getGroupStagePrecompute",
         "private": true,
         "run_as_system": true
     }
