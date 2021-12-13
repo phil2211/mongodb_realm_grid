@@ -81,6 +81,9 @@
             "lastRow": {
                 "bsonType": "int"
             },
+            "query": {
+                "bsonType": "string"
+            },
             "rows": {
                 "bsonType": "array",
                 "items": {

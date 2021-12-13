@@ -1,5 +1,18 @@
 [
     {
+        "name": "getGroupStagePrecompute",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getMatchStage",
+        "private": true
+    },
+    {
+        "name": "getSortStage",
+        "private": true
+    },
+    {
         "name": "resetPassword",
         "private": true
     },
@@ -18,19 +31,6 @@
     },
     {
         "name": "getGroupStage",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getMatchStage",
-        "private": true
-    },
-    {
-        "name": "getSortStage",
-        "private": true
-    },
-    {
-        "name": "getGroupStagePrecompute",
         "private": true,
         "run_as_system": true
     }
