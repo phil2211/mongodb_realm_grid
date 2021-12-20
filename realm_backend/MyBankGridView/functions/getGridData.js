@@ -7,6 +7,10 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   
   const agg = [];
   
+  // find out about the lowest level of grouping and take this to create
+  // group stage in aggregation pipeline
+  const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
+
   if(groupKeys.length > 0) {
     //generate match in grouping case and translate between string and int (because GraphQL schema in Realm only supports exactly one datatype as input)
     agg.push(context.functions.execute('getMatchStage', {rowGroupCols, groupKeys: groupKeys.map(key => isNaN(key) ? key : parseInt(key))}));
@@ -21,7 +25,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
 
   //set grouping if required
   if (rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
-    forEach(context.functions.execute('getGroupStage', {rowGroupCols, groupKeys, valueCols}), (element) => agg.push(element));
+    forEach(context.functions.execute('getGroupStage', {valueCols, groupToUse}), (element) => agg.push(element));
   }
   
   agg.push({
@@ -70,18 +74,6 @@ const groupKeys = [
 ]
 
 const valueCols = [
-    {
-        "id": "lastName",
-        "aggFunc": "first",
-        "displayName": "Last Name",
-        "field": "lastName"
-    },
-    {
-        "id": "firstName",
-        "aggFunc": "first",
-        "displayName": "First Name",
-        "field": "firstName"
-    },
     {
         "id": "accounts.balance",
         "aggFunc": "sum",
