@@ -8,7 +8,14 @@
                 "consultant.email": "%%user.data.email"
             },
             "apply_when": {
-                "%%user.custom_data.role": "consultant"
+                "%%true": {
+                    "%function": {
+                        "name": "setConsultantFilter",
+                        "arguments": [
+                            "%%user.custom_data"
+                        ]
+                    }
+                }
             }
         }
     ],
