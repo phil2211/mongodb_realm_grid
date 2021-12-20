@@ -1,15 +1,14 @@
 [
     {
+        "name": "createUserData",
+        "private": true
+    },
+    {
         "name": "updateAge",
         "private": true
     },
     {
-        "name": "updateTotalBalance",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getGroupStagePrecompute",
+        "name": "getGroupStage",
         "private": true,
         "run_as_system": true
     },
@@ -18,24 +17,25 @@
         "private": true
     },
     {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
-        "name": "createUserData",
-        "private": true
+        "name": "updateTotalBalance",
+        "private": true,
+        "run_as_system": true
     },
     {
         "name": "getGridData",
         "private": false
     },
     {
-        "name": "getGroupStage",
+        "name": "getMatchStage",
+        "private": true
+    },
+    {
+        "name": "getGroupStagePrecompute",
         "private": true,
         "run_as_system": true
     },
     {
-        "name": "getMatchStage",
+        "name": "resetPassword",
         "private": true
     }
 ]

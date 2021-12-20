@@ -3,17 +3,9 @@
     "database": "mybank",
     "roles": [
         {
-            "name": "default",
-            "apply_when": {},
-            "insert": true,
-            "delete": true,
-            "search": true,
-            "additional_fields": {}
-        },
-        {
             "name": "consultant",
             "apply_when": {
-                "%%root.consultant.email": "%%user.data.email"
+                "consultant.email": "%%user.data.email"
             },
             "read": true,
             "insert": false,
