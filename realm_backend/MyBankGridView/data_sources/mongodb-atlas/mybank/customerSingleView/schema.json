@@ -46,6 +46,23 @@
         "birthdate": {
             "bsonType": "date"
         },
+        "consultant": {
+            "bsonType": "object",
+            "properties": {
+                "email": {
+                    "bsonType": "string"
+                },
+                "firstName": {
+                    "bsonType": "string"
+                },
+                "lastName": {
+                    "bsonType": "string"
+                },
+                "rating": {
+                    "bsonType": "string"
+                }
+            }
+        },
         "consultantId": {
             "bsonType": "int"
         },

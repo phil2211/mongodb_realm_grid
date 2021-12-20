@@ -10,6 +10,17 @@
             "delete": true,
             "search": true,
             "additional_fields": {}
+        },
+        {
+            "name": "consultant",
+            "apply_when": {
+                "%%root.consultant.email": "%%user.data.email"
+            },
+            "read": true,
+            "insert": false,
+            "delete": false,
+            "search": true,
+            "additional_fields": {}
         }
     ]
 }
