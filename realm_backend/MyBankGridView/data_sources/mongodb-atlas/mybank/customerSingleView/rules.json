@@ -16,14 +16,6 @@
     ],
     "roles": [
         {
-            "name": "default",
-            "apply_when": {},
-            "insert": false,
-            "delete": false,
-            "search": true,
-            "additional_fields": {}
-        },
-        {
             "name": "consultant",
             "apply_when": {
                 "%%values.roles.consultant": {
@@ -31,6 +23,14 @@
                 }
             },
             "read": true,
+            "insert": false,
+            "delete": false,
+            "search": true,
+            "additional_fields": {}
+        },
+        {
+            "name": "default",
+            "apply_when": {},
             "insert": false,
             "delete": false,
             "search": true,
