@@ -5,7 +5,7 @@
         {
             "name": "consultant",
             "apply_when": {
-                "consultant.email": "%%user.data.email"
+                "%%user.data.email": "consultant.email"
             },
             "read": true,
             "insert": false,
