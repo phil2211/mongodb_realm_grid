@@ -8,7 +8,9 @@
                 "consultant.email": "%%user.data.email"
             },
             "apply_when": {
-                "%%user.custom_data.roles": "consultant"
+                "%%values.roles.consultant": {
+                    "%in": "%%user.custom_data.roles"
+                }
             }
         }
     ],
