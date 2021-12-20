@@ -2,6 +2,7 @@
     "from_secret": false,
     "name": "roles",
     "value": {
-        "consultant": "consultant"
+        "consultant": "consultant",
+        "user": "user"
     }
 }

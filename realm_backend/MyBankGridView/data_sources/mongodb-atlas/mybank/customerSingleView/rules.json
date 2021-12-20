@@ -12,6 +12,17 @@
                     "$in": "%%user.custom_data.roles"
                 }
             }
+        },
+        {
+            "name": "userCustomers",
+            "query": {
+                "customerId": "%%user.id"
+            },
+            "apply_when": {
+                "%%values.roles.user": {
+                    "%in": "%%user.custom_data.roles"
+                }
+            }
         }
     ],
     "roles": [
@@ -22,6 +33,9 @@
                     "$in": "%%user.custom_data.roles"
                 }
             },
+            "fields": {
+                "crmInformation": {}
+            },
             "read": true,
             "insert": false,
             "delete": false,
@@ -29,8 +43,28 @@
             "additional_fields": {}
         },
         {
+            "name": "user",
+            "apply_when": {
+                "%%values.roles.user": {
+                    "%in": "%%user.custom_data.roles"
+                }
+            },
+            "fields": {
+                "crmInformation": {}
+            },
+            "insert": false,
+            "delete": false,
+            "search": true,
+            "additional_fields": {
+                "read": true
+            }
+        },
+        {
             "name": "default",
             "apply_when": {},
+            "fields": {
+                "crmInformation": {}
+            },
             "insert": false,
             "delete": false,
             "search": true,
