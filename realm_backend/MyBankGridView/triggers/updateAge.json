@@ -1,0 +1,16 @@
+{
+    "id": "61c0866a9f5076cb5b4a32d5",
+    "name": "updateAge",
+    "type": "SCHEDULED",
+    "config": {
+        "schedule": "5 23 * * *"
+    },
+    "disabled": false,
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "updateAge"
+            }
+        }
+    }
+}

@@ -1,14 +1,5 @@
 [
     {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
-        "name": "updateTotalBalance",
-        "private": true,
-        "run_as_system": true
-    },
-    {
         "name": "createUserData",
         "private": true
     },
@@ -32,6 +23,19 @@
     },
     {
         "name": "getSortStage",
+        "private": true
+    },
+    {
+        "name": "resetPassword",
+        "private": true
+    },
+    {
+        "name": "updateTotalBalance",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "updateAge",
         "private": true
     }
 ]
