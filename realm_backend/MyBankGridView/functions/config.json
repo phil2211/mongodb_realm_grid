@@ -1,10 +1,10 @@
 [
     {
-        "name": "getGridData",
-        "private": false
+        "name": "resetPassword",
+        "private": true
     },
     {
-        "name": "getGridDataPrecompute",
+        "name": "getGridData",
         "private": false
     },
     {
@@ -16,8 +16,8 @@
         "private": true
     },
     {
-        "name": "createUserData",
-        "private": true
+        "name": "getGridDataPrecompute",
+        "private": false
     },
     {
         "name": "getGroupStage",
@@ -25,17 +25,13 @@
         "run_as_system": true
     },
     {
-        "name": "updateAge",
-        "private": true
-    },
-    {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
         "name": "updateTotalBalance",
         "private": true,
         "run_as_system": true
+    },
+    {
+        "name": "createUserData",
+        "private": true
     },
     {
         "name": "getGroupStagePrecompute",
@@ -43,7 +39,7 @@
         "run_as_system": true
     },
     {
-        "name": "setConsultantFilter",
-        "private": false
+        "name": "updateAge",
+        "private": true
     }
 ]
