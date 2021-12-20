@@ -16,7 +16,7 @@
         {
             "name": "userCustomers",
             "query": {
-                "customerId": "%%user.id"
+                "customerId": "%%user.custom_data.customerId"
             },
             "apply_when": {
                 "%%values.roles.user": {
