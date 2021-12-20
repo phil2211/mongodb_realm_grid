@@ -33,7 +33,8 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
 
   //set grouping if required
   if (rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
-    forEach(context.functions.execute('getGroupStagePrecompute', {rowGroupCols, valueCols, groupToUse}), (element) => agg.push(element));
+    //forEach(context.functions.execute('getGroupStagePrecompute', {rowGroupCols, valueCols, groupToUse}), (element) => agg.push(element));
+    forEach(context.functions.execute('getGroupStage', {rowGroupCols, valueCols, groupToUse}), (element) => agg.push(element));
   }
   
   agg.push({
