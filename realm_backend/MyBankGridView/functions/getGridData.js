@@ -63,14 +63,13 @@ const rowGroupCols= [
         "field": "country"
     },
     {
-        "id": "_id",
+        "id": "customerId",
         "displayName": "Customer",
         "field": "customer"
     }
 ]
 
 const groupKeys = [
-    "583.720.911-53"
 ]
 
 const valueCols = [
