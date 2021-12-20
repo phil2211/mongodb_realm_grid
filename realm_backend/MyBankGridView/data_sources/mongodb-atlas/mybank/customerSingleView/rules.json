@@ -20,7 +20,7 @@
             },
             "apply_when": {
                 "%%values.roles.user": {
-                    "%in": "%%user.custom_data.roles"
+                    "$in": "%%user.custom_data.roles"
                 }
             }
         }
@@ -46,7 +46,7 @@
             "name": "user",
             "apply_when": {
                 "%%values.roles.user": {
-                    "%in": "%%user.custom_data.roles"
+                    "$in": "%%user.custom_data.roles"
                 }
             },
             "fields": {
