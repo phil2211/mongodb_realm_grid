@@ -1,12 +1,21 @@
 {
     "collection": "customerSingleView",
     "database": "mybank",
-    "roles": [
+    "filters": [
         {
-            "name": "consultant",
-            "apply_when": {
+            "name": "consultantCustomers",
+            "query": {
                 "consultant.email": "%%user.data.email"
             },
+            "apply_when": {
+                "%%user.type": "consultant"
+            }
+        }
+    ],
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
             "read": true,
             "insert": false,
             "delete": false,
