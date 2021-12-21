@@ -3,6 +3,7 @@
     "name": "roles",
     "value": {
         "consultant": "consultant",
+        "regionManager": "regionManager",
         "user": "user"
     }
 }

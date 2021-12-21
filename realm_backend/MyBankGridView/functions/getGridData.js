@@ -42,6 +42,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   agg.push({
     $project: {
       rows: 1,
+      query: JSON.stringify(agg),
       lastRow: {$arrayElemAt: ["$rowCount.lastRow", 0]}
     }
   });
