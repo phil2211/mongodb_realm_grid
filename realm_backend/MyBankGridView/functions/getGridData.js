@@ -1,4 +1,4 @@
-exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[], sortModel=[] }) => {
+exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[], sortModel=[], searchText=""}) => {
   
   const forEach = require("lodash/forEach");
   
@@ -7,45 +7,49 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   
   const agg = [];
   
-  // find out about the lowest level of grouping and take this to create
-  // group stage in aggregation pipeline
-  const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
-
-  if(groupKeys.length > 0) {
-    //generate match in grouping case and translate between string and int (because GraphQL schema in Realm only supports exactly one datatype as input)
-    agg.push(context.functions.execute('getMatchStage', {rowGroupCols, groupKeys: groupKeys.map(key => isNaN(key) ? key : parseInt(key))}));
-  }
+  if(searchText.length > 0) {
+    forEach(context.functions.execute('getSearch', {searchText, startRow, endRow}), (element) => agg.push(element));
+  } else {
+    // find out about the lowest level of grouping and take this to create
+    // group stage in aggregation pipeline
+    const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
   
-  agg.push(
-    { $unwind: {
-        path: "$accounts",
-        preserveNullAndEmptyArrays: false
-    }}
-  );
-
-  //set grouping if required
-  if (rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
-    forEach(context.functions.execute('getGroupStage', {valueCols, groupToUse}), (element) => agg.push(element));
-  }
-  
-  agg.push({
-    $sort: sortModel.length <= 0 ? {_id:1} : context.functions.execute('getSortStage', sortModel)
-  });
-  
-  agg.push({
-    $facet: {
-      rows: [{"$skip": startRow}, {"$limit": endRow-startRow}],
-      rowCount: [{$count: 'lastRow'}]
+    if(groupKeys.length > 0) {
+      //generate match in grouping case and translate between string and int (because GraphQL schema in Realm only supports exactly one datatype as input)
+      agg.push(context.functions.execute('getMatchStage', {rowGroupCols, groupKeys: groupKeys.map(key => isNaN(key) ? key : parseInt(key))}));
     }
-  });
-
-  agg.push({
-    $project: {
-      rows: 1,
-      query: JSON.stringify(agg),
-      lastRow: {$arrayElemAt: ["$rowCount.lastRow", 0]}
+    
+    agg.push(
+      { $unwind: {
+          path: "$accounts",
+          preserveNullAndEmptyArrays: false
+      }}
+    );
+  
+    //set grouping if required
+    if (rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
+      forEach(context.functions.execute('getGroupStage', {valueCols, groupToUse}), (element) => agg.push(element));
     }
-  });
+    
+    agg.push({
+      $sort: sortModel.length <= 0 ? {_id:1} : context.functions.execute('getSortStage', sortModel)
+    });
+    
+    agg.push({
+      $facet: {
+        rows: [{"$skip": startRow}, {"$limit": endRow-startRow}],
+        rowCount: [{$count: 'lastRow'}]
+      }
+    });
+  
+    agg.push({
+      $project: {
+        rows: 1,
+        query: JSON.stringify(agg),
+        lastRow: {$arrayElemAt: ["$rowCount.lastRow", 0]}
+      }
+    });
+  }
   
   console.log(JSON.stringify(agg, null, ' '));
   
