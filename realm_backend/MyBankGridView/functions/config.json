@@ -1,15 +1,11 @@
 [
     {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
         "name": "updateAge",
         "private": true
     },
     {
-        "name": "createUserData",
-        "private": true
+        "name": "getGridDataPrecompute",
+        "private": false
     },
     {
         "name": "getGroupStage",
@@ -17,20 +13,11 @@
         "run_as_system": true
     },
     {
-        "name": "getGroupStagePrecompute",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getGridDataPrecompute",
-        "private": false
-    },
-    {
         "name": "getMatchStage",
         "private": true
     },
     {
-        "name": "getSortStage",
+        "name": "createUserData",
         "private": true
     },
     {
@@ -39,11 +26,24 @@
         "run_as_system": true
     },
     {
+        "name": "getSortStage",
+        "private": true
+    },
+    {
         "name": "getSortStagePrecompute",
+        "private": true
+    },
+    {
+        "name": "resetPassword",
         "private": true
     },
     {
         "name": "getGridData",
         "private": false
+    },
+    {
+        "name": "getGroupStagePrecompute",
+        "private": true,
+        "run_as_system": true
     }
 ]
