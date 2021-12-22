@@ -53,7 +53,7 @@ exports = function({searchText, startRow, endRow}) {
   searchAgg.push(
     {$facet: {
      rows: [{ $skip: startRow }, { $limit: endRow-startRow }],
-     rowCount: [{ $replaceWith: '$$SEARCH_META' }, { $limit: 1 }]
+     rowCount: [{ $replaceWith: "$$SEARCH_META" }, { $limit: 1 }]
     }}
   );
   
@@ -62,7 +62,7 @@ exports = function({searchText, startRow, endRow}) {
      rows: 1,
      rowCount: {
       $arrayElemAt: [
-       '$rowCount.count.lowerBound',
+       "$rowCount.count.lowerBound",
        0
       ]
      }

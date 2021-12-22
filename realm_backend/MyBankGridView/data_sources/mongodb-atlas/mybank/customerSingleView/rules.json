@@ -23,54 +23,9 @@
                     "$in": "%%user.custom_data.roles"
                 }
             }
-        },
-        {
-            "name": "regionManager",
-            "query": {
-                "address.country": {
-                    "$in": "%%user.custom_data.regionManagerCountries"
-                }
-            },
-            "apply_when": {
-                "%%values.roles.regionManager": {
-                    "$in": "%%user.custom_data.roles"
-                }
-            }
         }
     ],
     "roles": [
-        {
-            "name": "regionManager",
-            "apply_when": {
-                "%%values.roles.regionManager": {
-                    "$in": "%%user.custom_data.roles"
-                }
-            },
-            "fields": {
-                "crmInformation": {}
-            },
-            "read": true,
-            "insert": false,
-            "delete": false,
-            "search": true,
-            "additional_fields": {}
-        },
-        {
-            "name": "consultant",
-            "apply_when": {
-                "%%values.roles.consultant": {
-                    "$in": "%%user.custom_data.roles"
-                }
-            },
-            "fields": {
-                "crmInformation": {}
-            },
-            "read": true,
-            "insert": false,
-            "delete": false,
-            "search": true,
-            "additional_fields": {}
-        },
         {
             "name": "user",
             "apply_when": {
@@ -87,6 +42,31 @@
             "additional_fields": {
                 "read": true
             }
+        },
+        {
+            "name": "employer",
+            "apply_when": {
+                "%or": [
+                    {
+                        "%%values.roles.consultant": {
+                            "$in": "%%user.custom_data.roles"
+                        }
+                    },
+                    {
+                        "%%values.roles.regionManager": {
+                            "$in": "%%user.custom_data.roles"
+                        }
+                    }
+                ]
+            },
+            "fields": {
+                "crmInformation": {}
+            },
+            "read": true,
+            "insert": false,
+            "delete": false,
+            "search": true,
+            "additional_fields": {}
         },
         {
             "name": "default",
