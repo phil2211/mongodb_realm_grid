@@ -8,9 +8,7 @@
                 "consultant.email": "%%user.data.email"
             },
             "apply_when": {
-                "%%values.roles.consultant": {
-                    "$in": "%%user.custom_data.roles"
-                }
+                "%%user.custom_data.role": "consultant"
             }
         },
         {
@@ -19,9 +17,7 @@
                 "customerId": "%%user.custom_data.customerId"
             },
             "apply_when": {
-                "%%values.roles.user": {
-                    "$in": "%%user.custom_data.roles"
-                }
+                "%%user.custom_data.role": "user"
             }
         },
         {
@@ -32,9 +28,7 @@
                 }
             },
             "apply_when": {
-                "%%values.roles.regionManager": {
-                    "$in": "%%user.custom_data.roles"
-                }
+                "%%user.custom_data.role": "regionManager"
             }
         }
     ],
@@ -42,9 +36,7 @@
         {
             "name": "user",
             "apply_when": {
-                "%%values.roles.user": {
-                    "$in": "%%user.custom_data.roles"
-                }
+                "%%user.custom_data.role": "user"
             },
             "fields": {
                 "crmInformation": {}
@@ -59,23 +51,9 @@
         {
             "name": "employer",
             "apply_when": {
-                "$or": [
-                    {
-                        "%%values.roles.admin": {
-                            "$in": "%%user.custom_data.roles"
-                        }
-                    },
-                    {
-                        "%%values.roles.consultant": {
-                            "$in": "%%user.custom_data.roles"
-                        }
-                    },
-                    {
-                        "%%values.roles.regionManager": {
-                            "$in": "%%user.custom_data.roles"
-                        }
-                    }
-                ]
+                "%%user.custom_data.role": {
+                    "%in": "%%values.employerRoles"
+                }
             },
             "fields": {
                 "crmInformation": {}

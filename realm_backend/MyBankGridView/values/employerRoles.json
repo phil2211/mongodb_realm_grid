@@ -1,0 +1,9 @@
+{
+    "name": "employerRoles",
+    "value": [
+        "consultant",
+        "regionManager",
+        "admin"
+    ],
+    "from_secret": false
+}
