@@ -50,14 +50,14 @@ exports = function({searchText, startRow, endRow, valueCols}) {
      }
     }}
   );
-  
+/*   
   searchAgg.push(
       { $unwind: {
           path: "$accounts",
           preserveNullAndEmptyArrays: false
       }}
     );
-  
+ 
   const groupToUse = [
     {
         "id": "customerId",
@@ -87,7 +87,7 @@ exports = function({searchText, startRow, endRow, valueCols}) {
      //}
     }}    
   );
-  
+*/  
   return searchAgg;
 };
 
