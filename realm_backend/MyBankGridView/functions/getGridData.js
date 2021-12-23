@@ -11,7 +11,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   const agg = [];
   
   // build different aggregation when using search
-  if(searchText.length > 0 && groupToUse[0].id === "customerId") {
+  if(searchText.length > 0 && rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
     forEach(context.functions.execute('getSearch', {searchText, startRow, endRow}), (element) => agg.push(element));
   }
   if(groupKeys.length > 0) {
