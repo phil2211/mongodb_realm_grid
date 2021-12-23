@@ -52,7 +52,7 @@
             "name": "employer",
             "apply_when": {
                 "%%user.custom_data.role": {
-                    "%in": "%%values.employerRoles"
+                    "$in": "%%values.employerRoles"
                 }
             },
             "fields": {

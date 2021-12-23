@@ -4,16 +4,15 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   
   const cluster = context.services.get("mongodb-atlas");
   const collection = cluster.db("mybank").collection("customerSingleView");
-  
+  // find out about the lowest level of grouping and take this to create
+  // group stage in aggregation pipeline
+  const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
+
   const agg = [];
   
-  if(searchText.length > 0) {
+  if(searchText.length > 0 && groupToUse[0].id === "customerId") {
     forEach(context.functions.execute('getSearch', {searchText, startRow, endRow}), (element) => agg.push(element));
   } else {
-    // find out about the lowest level of grouping and take this to create
-    // group stage in aggregation pipeline
-    const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
-  
     if(groupKeys.length > 0) {
       //generate match in grouping case and translate between string and int (because GraphQL schema in Realm only supports exactly one datatype as input)
       agg.push(context.functions.execute('getMatchStage', {rowGroupCols, groupKeys: groupKeys.map(key => isNaN(key) ? key : parseInt(key))}));
