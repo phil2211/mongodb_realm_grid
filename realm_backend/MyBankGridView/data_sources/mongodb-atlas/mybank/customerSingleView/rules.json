@@ -23,6 +23,19 @@
                     "$in": "%%user.custom_data.roles"
                 }
             }
+        },
+        {
+            "name": "regionManager",
+            "query": {
+                "address.country": {
+                    "$in": "%%user.custom_data.regionManagerCountries"
+                }
+            },
+            "apply_when": {
+                "%%values.roles.regionManager": {
+                    "$in": "%%user.custom_data.roles"
+                }
+            }
         }
     ],
     "roles": [
