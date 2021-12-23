@@ -12,7 +12,6 @@ const createRealmApolloClient = (app) => {
             // Refreshing a user's custom data also refreshes their access token
             await app.currentUser.refreshCustomData();
             // The handler adds a bearer token Auth header to the otherwise unchanged request
-            console.log(app.currentUser);
             options.headers.Authorization = `Bearer ${app.currentUser.accessToken}`;
             return fetch(uri, options);
         }

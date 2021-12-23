@@ -38,7 +38,10 @@ const onSortChanged = (params) => {
 const rowSelection = "single";
 const rowModelType = "serverSide";
 const serverSideStoreType = "partial";
-const cacheBlockSize = 100;
+const cacheBlockSize = 50;
+const maxConcurrentDatasourceRequests = 5;
+const rowBuffer = 100;
+
 
 export default {
     columnTypes,
@@ -49,6 +52,8 @@ export default {
     cacheBlockSize,
     rowGroupPanelShow,
     groupDisplayType,
-    onSortChanged
+    onSortChanged,
+    maxConcurrentDatasourceRequests,
+    rowBuffer
     //sideBar
 }

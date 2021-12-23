@@ -1,10 +1,9 @@
 import { gql } from "@apollo/client";
 
-export const createServerSideDatasource = ({ client }) => {
+export const createServerSideDatasource = ({ client, searchText='' }) => {
     return {
         getRows: (params) => {
-            console.log(params);
-            //console.log(params.columnApi.getAllDisplayedColumns().map(col => col.getColId()).filter(colName => colName !== "ag-Grid-AutoColumn"));
+            console.log(params, searchText);
             const { startRow, endRow, rowGroupCols, groupKeys, valueCols, sortModel } = params.request;
             sortModel.map(model => model.sort = model.sort.toUpperCase());
 
@@ -35,6 +34,7 @@ export const createServerSideDatasource = ({ client }) => {
                     query getGridData($queryModelInput:GridQueryModel) {
                         getGridData(input: $queryModelInput) {
                             lastRow
+                            query
                             rows {
                                 ${rowGroupCols.length > 0 && rowGroupCols.length === groupKeys.length ? customerGroup : allGroups}
                             }
@@ -49,7 +49,8 @@ export const createServerSideDatasource = ({ client }) => {
                         rowGroupCols,
                         groupKeys,
                         valueCols,
-                        sortModel
+                        sortModel,
+                        searchText
                     }
                 }
             };

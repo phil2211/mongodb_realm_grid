@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LoginScreen from "./Containers/LoginScreen";
 import GoogleLogin from "./Containers/GoogleLogin";
+import Sandbox from "./Containers/Sandbox";
 import Grid from "./Containers/Grid";
 import { msalConfig } from "./lib/azure/authConfig";
 import RealmApolloProvider from "./lib/graphql/apolloClient";
@@ -34,6 +35,14 @@ const App = () => {
               </RealmApolloProvider>
             </RequireLoggedInUser>
             } />
+            <Route path="/sandbox" element={
+              <RequireLoggedInUser>
+                <RealmApolloProvider>
+                  <Sandbox />
+              </RealmApolloProvider>
+            </RequireLoggedInUser>
+            } />
+
           </Routes>
         </BrowserRouter>
       </MsalProvider>

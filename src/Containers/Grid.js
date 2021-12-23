@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { debounce } from "lodash";
 import Button from "@leafygreen-ui/button";
+import TextInput from '@leafygreen-ui/text-input';
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "ag-grid-enterprise";
@@ -8,7 +10,6 @@ import "ag-grid-enterprise";
 import GridOptions from './GridOptions';
 import ApolloClientWrapper from '../lib/graphql/ApolloClientWrapper';
 import { createServerSideDatasource } from "../lib/graphql/gridDatasource";
-import Container from "../Components/Container";
 import { useRealmApp } from "../RealmApp";
 
 const formatCurrency = (params) => {
@@ -22,6 +23,13 @@ const formatNumber = (value) => {
 
 const Grid = ({ client }) => {
     const app = useRealmApp();
+    const [gridApi, setGridApi] = useState(null);
+    const [totalRows, setTotalRows] = useState(0);
+    const [searchText, setSearchText] = useState('');
+    const [user] = useState(app.currentUser);
+    const { role } = user.customData;
+
+    const debouncedSearch = debounce(setSearchText, 500);
 
     const columnDefs = [
         { 
@@ -34,9 +42,9 @@ const Grid = ({ client }) => {
         },
         { field: "lastName", type: "detail" },
         { field: "firstName", type: "detail" },
-        { field: "age", type: "dimension" },
-        { field: "country", colId: "address.country", type: "dimension", valueGetter: "data.address.country"},
-        { field: "segment", colId: "crmInformation.segmentation", type: "dimension", valueGetter: "data.crmInformation.segmentation"},
+        { field: "age", type: role==="user"?"detail":"dimension" },
+        { field: "country", colId: "address.country", type: role==="user"?"detail":"dimension", valueGetter: "data.address.country"},
+        { field: "segment", colId: "crmInformation.segmentation", type: role==="user"?"detail":"dimension", valueGetter: "data.crmInformation.segmentation", hide: role === "user" },
         { field: "account", colId: "accounts.number", valueGetter: "data.accounts.number"},
         { 
             field: "balance", 
@@ -50,14 +58,18 @@ const Grid = ({ client }) => {
             }
         }
     ]
+    const gridOptions = Object.assign(GridOptions, { columnDefs });
 
-    const gridOptions = Object.assign(GridOptions, {columnDefs});
-    const datasource = createServerSideDatasource({client});
+    useEffect(() => {
+        if(gridApi) {
+            onGridReady(gridApi, searchText);
+        }
+    }, [searchText]);
 
-    const [totalRows, setTotalRows] = React.useState(0);
-
-    const onGridReady = (params) => {
+    const onGridReady = (params, searchText) => {
+        setGridApi(params);
         params.api.sizeColumnsToFit();
+        const datasource = createServerSideDatasource({ client, searchText });
         params.api.setServerSideDatasource(datasource);
     }
 
@@ -65,8 +77,18 @@ const Grid = ({ client }) => {
         setTotalRows(params.api.getDisplayedRowCount());
     }
 
+    console.log(user);
+
     return (
-        <>
+        <>       
+        {user.customData.role !== "user" &&
+            <input 
+                type="search"
+                placeholder="Search for customer..." 
+                style={{padding: 10, fontSize: "105%", width:"100%", outline: 0}} 
+                onChange={e=>debouncedSearch(e.target.value)}
+            />
+        }
         <div         
             style={{ height: "calc(100vh - 250px)" }}
             className="ag-theme-alpine"
@@ -77,9 +99,12 @@ const Grid = ({ client }) => {
                 onModelUpdated={onModelUpdate}
             />
         </div>
-        <h4>{`Total Results: ${formatNumber(totalRows)}`}</h4>
-        <h4>User: {app.currentUser.id ? `${app.currentUser.id} (${app.currentUser.providerType})` : "not logged in"}</h4>
-        <Button variant="primary" onClick={() => app.logOut()}>Logout</Button>
+        <div style={{margin: 10}}>
+            <p>{`Total Results: ${formatNumber(totalRows)}`}</p>
+            <p>User: {user.id ? `${user.profile.name} (${user.providerType})` : "not logged in"}</p>
+            <p>{`Role: ${role}`}</p>
+            <Button variant="primary" onClick={() => app.logOut()}>Logout</Button>
+        </div>
         </>
     )
 }
