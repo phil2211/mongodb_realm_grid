@@ -59,7 +59,7 @@
         {
             "name": "employer",
             "apply_when": {
-                "%or": [
+                "$or": [
                     {
                         "%%values.roles.consultant": {
                             "$in": "%%user.custom_data.roles"

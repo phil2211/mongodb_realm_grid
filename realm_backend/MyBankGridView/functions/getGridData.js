@@ -46,7 +46,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
       $project: {
         rows: 1,
         query: JSON.stringify(agg),
-        lastRow: {$arrayElemAt: ["$rowCount.lastRow", 0]}
+        lastRow: {"$ifNull": [{$arrayElemAt: ["$rowCount.lastRow", 0]}, 0]}
       }
     });
   }
