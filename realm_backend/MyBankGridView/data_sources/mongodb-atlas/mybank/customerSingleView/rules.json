@@ -61,6 +61,11 @@
             "apply_when": {
                 "$or": [
                     {
+                        "%%values.roles.admin": {
+                            "$in": "%%user.custom_data.roles"
+                        }
+                    },
+                    {
                         "%%values.roles.consultant": {
                             "$in": "%%user.custom_data.roles"
                         }
