@@ -1,9 +1,0 @@
-{
-    "from_secret": false,
-    "name": "roles",
-    "value": {
-        "consultant": "consultant",
-        "regionManager": "regionManager",
-        "user": "user"
-    }
-}

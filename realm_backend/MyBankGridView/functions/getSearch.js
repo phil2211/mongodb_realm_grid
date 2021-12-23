@@ -78,7 +78,7 @@ exports = function({searchText, startRow, endRow, valueCols}) {
     {$project: {
      rows: 1,
      query: JSON.stringify(searchAgg),
-     lastRow: {$arrayElemAt: ["$rowCount.lastRow", 0]}
+     lastRow: {"$ifNull": [{$arrayElemAt: ["$rowCount.lastRow", 0]}, 0]}
      //rowCount: {
       //$arrayElemAt: [
       // "$rowCount.count.lowerBound",
