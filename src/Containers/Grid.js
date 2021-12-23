@@ -82,13 +82,11 @@ const Grid = ({ client }) => {
     return (
         <>       
         {user.customData.role !== "user" &&
-            <input 
+            <TextInput
                 type="search"
-                placeholder="Search for customer..." 
-                style={{padding: 10, fontSize: "105%", width:"100%", outline: 0}} 
-                onChange={e=>debouncedSearch(e.target.value)}
-            />
-        }
+                placeholder="Search for customer..."
+                onChange={event => debouncedSearch(event.target.value)}
+            />}
         <div         
             style={{ height: "calc(100vh - 250px)" }}
             className="ag-theme-alpine"
