@@ -60,7 +60,8 @@ const Grid = ({ client }) => {
             valueGetter: "data.crmInformation.totalContactsYtd",
             colId: "crmInformation.totalContactsYtd",
             type: "fact",
-            aggFunc: "avg"
+            aggFunc: "avg",
+            hide: role === "user"
         }
 
     ]
