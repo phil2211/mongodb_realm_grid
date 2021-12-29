@@ -11,6 +11,7 @@ import GridOptions from './GridOptions';
 import ApolloClientWrapper from '../lib/graphql/ApolloClientWrapper';
 import { createServerSideDatasource } from "../lib/graphql/gridDatasource";
 import { useRealmApp } from "../RealmApp";
+import Header from "../Components/Header";
 
 const formatCurrency = (params) => {
     return new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'EUR'}).format(params.value);
@@ -80,7 +81,8 @@ const Grid = ({ client }) => {
     console.log(user);
 
     return (
-        <>       
+        <>   
+        <Header />    
         {user.customData.role !== "user" &&
             <TextInput
                 type="search"
@@ -88,7 +90,7 @@ const Grid = ({ client }) => {
                 onChange={event => debouncedSearch(event.target.value)}
             />}
         <div         
-            style={{ height: "calc(100vh - 250px)" }}
+            style={{ height: "calc(100vh - 280px)" }}
             className="ag-theme-alpine"
         >
             <AgGridReact

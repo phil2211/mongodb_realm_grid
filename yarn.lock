@@ -1726,6 +1726,11 @@
     polished "^4.1.3"
     prop-types "^15.0.0"
 
+"@leafygreen-ui/logo@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/logo/-/logo-6.1.0.tgz#71bd3f8bf3970954291eee49ab47ec1f555772a4"
+  integrity sha512-PsvSVcaSLMAtkGrEEbklIoKBixNW6ilQl+aW4opTtYdNFxx2bAOkYSOYKAAWN6gvh39nBM4T3y58GDVGfuhQuA==
+
 "@leafygreen-ui/palette@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-3.2.2.tgz#9fc9a8051d9a07cbc50a7f8918f33e146d717070"
