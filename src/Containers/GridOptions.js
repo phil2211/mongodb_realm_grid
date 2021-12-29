@@ -7,7 +7,7 @@ const columnTypes = {
         enableRowGroup: true,
         enablePivot: true
     },
-    valueColumn: {
+    fact: {
         aggFunc: "sum",
     }
 };

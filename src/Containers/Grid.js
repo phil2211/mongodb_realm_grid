@@ -37,29 +37,46 @@ const Grid = ({ client }) => {
             field: "customer",
             colId: "customerId",
             valueGetter: "data.customerId",
-            type: "dimension",
-            rowGroup: true,
-            hide: true
+            type: "detail",
+            cellRenderer: "agGroupCellRenderer"
         },
         { field: "lastName", type: "detail" },
         { field: "firstName", type: "detail" },
         { field: "age", type: role==="user"?"detail":"dimension" },
         { field: "country", colId: "address.country", type: role==="user"?"detail":"dimension", valueGetter: "data.address.country"},
         { field: "segment", colId: "crmInformation.segmentation", type: role==="user"?"detail":"dimension", valueGetter: "data.crmInformation.segmentation", hide: role === "user" },
-        { field: "account", colId: "accounts.number", valueGetter: "data.accounts.number"},
         { 
-            field: "balance", 
-            colId: "accounts.balance",
-            valueGetter: "data.accounts.balance", 
+            field: "totalBalance", 
+            colId: "totalBalance",
             valueFormatter: formatCurrency,
-            type: "valueColumn",
+            type: "fact",
             cellClassRules: {
                 "rag-red": params => params.value <= 0,
                 "rag-green": params => params.value > 0
             }
+        },
+        { 
+            field: "totalContactsYtd",
+            valueGetter: "data.crmInformation.totalContactsYtd",
+            colId: "crmInformation.totalContactsYtd",
+            type: "fact",
+            aggFunc: "avg"
         }
+
     ]
     const gridOptions = Object.assign(GridOptions, { columnDefs });
+
+    const detailColumnDefs = [
+        {field: "number"},
+        {field: "name", sortable: true},
+        {field: "type", sortable: true},
+        {field: "balance", cellClassRules: {
+                "rag-red": params => params.value <= 0,
+                "rag-green": params => params.value > 0
+            }, 
+            sortable: true
+        }
+    ]
 
     useEffect(() => {
         if(gridApi) {
@@ -78,8 +95,6 @@ const Grid = ({ client }) => {
         setTotalRows(params.api.getDisplayedRowCount());
     }
 
-    console.log(user);
-
     return (
         <>   
         <Header />    
@@ -97,6 +112,16 @@ const Grid = ({ client }) => {
                 gridOptions={gridOptions}
                 onGridReady={onGridReady}
                 onModelUpdated={onModelUpdate}
+                masterDetail={true}
+                detailCellRendererParams={{
+                    getDetailRowData: (params) => {
+                        console.log(params.data)
+                        params.successCallback(params.data.accounts)
+                    },
+                    detailGridOptions: {
+                        columnDefs: detailColumnDefs
+                    }
+                }}
             />
         </div>
         <div style={{margin: 10}}>

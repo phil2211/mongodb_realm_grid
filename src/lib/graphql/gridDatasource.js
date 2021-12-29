@@ -7,28 +7,6 @@ export const createServerSideDatasource = ({ client, searchText='' }) => {
             const { startRow, endRow, rowGroupCols, groupKeys, valueCols, sortModel } = params.request;
             sortModel.map(model => model.sort = model.sort.toUpperCase());
 
-            const customerGroup = `
-            accounts {
-                number
-                balance
-            `;
-
-            const allGroups = `
-            customerId
-            lastName
-            firstName
-            age
-            address {
-                country
-            }
-            crmInformation {
-                segmentation
-            }
-            accounts {
-                number
-                balance
-            `;
-
             const query = { 
                 query: gql`
                     query getGridData($queryModelInput:GridQueryModel) {
@@ -36,11 +14,27 @@ export const createServerSideDatasource = ({ client, searchText='' }) => {
                             lastRow
                             query
                             rows {
-                                ${rowGroupCols.length > 0 && rowGroupCols.length === groupKeys.length ? customerGroup : allGroups}
+                                customerId
+                                lastName
+                                firstName
+                                age
+                                totalBalance
+                                address {
+                                    country
+                                }
+                                crmInformation {
+                                    segmentation
+                                    totalContactsYtd
+                                }
+                                accounts {
+                                    balance
+                                    name
+                                    number
+                                    type
+                                }
                             }
                         }
                     }
-                }
                 `,
                 variables: {
                     "queryModelInput" : {
