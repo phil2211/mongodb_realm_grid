@@ -14,6 +14,7 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   if(searchText.length > 0 && rowGroupCols.length > 0 && rowGroupCols.length > groupKeys.length) {
     forEach(context.functions.execute('getSearch', {searchText, startRow, endRow}), (element) => agg.push(element));
   }
+  
   if(groupKeys.length > 0) {
     //generate match in grouping case and translate between string and int (because GraphQL schema in Realm only supports exactly one datatype as input)
     agg.push(context.functions.execute('getMatchStage', {rowGroupCols, groupKeys: groupKeys.map(key => isNaN(key) ? key : parseInt(key))}));
@@ -55,19 +56,9 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
 
 const rowGroupCols= [
   {
-    "id": "crmInformation.segmentation",
-    "displayName": "Segment",
-    "field": "segment"
-  },
-  {
     "id": "age",
     "displayName": "Age",
     "field": "age"
-  },
-  {
-    "id": "customerId",
-    "displayName": "Customer",
-    "field": "customer"
   }
 ]
 
@@ -76,16 +67,10 @@ const groupKeys = [
 
 const valueCols = [
   {
-    "id": "accounts.balance",
+    "id": "totalBalance",
     "aggFunc": "sum",
-    "displayName": "Balance",
-    "field": "balance"
-  },
-  {
-    "id": "crmInformation.totalContactsYtd",
-    "aggFunc": "sum",
-    "displayName": "Total Contacts Ytd",
-    "field": "totalContactsYtd"
+    "displayName": "Total Balance",
+    "field": "totalBalance"
   }
 ]
 
