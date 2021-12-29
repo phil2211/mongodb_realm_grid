@@ -93,19 +93,22 @@
                     "bsonType": "object",
                     "properties": {
                         "accounts": {
-                            "bsonType": "object",
-                            "properties": {
-                                "balance": {
-                                    "bsonType": "decimal"
-                                },
-                                "name": {
-                                    "bsonType": "string"
-                                },
-                                "number": {
-                                    "bsonType": "string"
-                                },
-                                "type": {
-                                    "bsonType": "string"
+                            "bsonType": "array",
+                            "items": {
+                                "bsonType": "object",
+                                "properties": {
+                                    "balance": {
+                                        "bsonType": "decimal"
+                                    },
+                                    "name": {
+                                        "bsonType": "string"
+                                    },
+                                    "number": {
+                                        "bsonType": "string"
+                                    },
+                                    "type": {
+                                        "bsonType": "string"
+                                    }
                                 }
                             }
                         },
