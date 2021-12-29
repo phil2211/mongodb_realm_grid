@@ -14,7 +14,8 @@ exports = ({ valueCols, groupToUse }) => {
       firstName: "$_id.firstName",
       age: "$_id.age",
       crmInformation: {
-        segmentation: "$_id.segmentation"
+        segmentation: "$_id.segmentation",
+        totalContactsYtd: "$totalContactsYtd"
       },
       address: {
         country: "$_id.country"
@@ -36,6 +37,9 @@ exports = ({ valueCols, groupToUse }) => {
     groupBody = {
       "balance": {
         "$sum": "$accounts.balance"
+      },
+      "totalContactsYtd": {
+        "$sum": "$crmInformation.totalContactsYtd"
       }
     }
   } else {
@@ -81,49 +85,28 @@ function convertDotPathToNestedObject(path, value) {
 Testdata
 ========
 
-const rowGroupCols= [
+const groupToUse= [
     {
         "id": "age",
         "displayName": "Age",
         "field": "age"
-    },
-    {
-        "id": "country",
-        "displayName": "Country",
-        "field": "country"
-    },
-    {
-        "id": "_id",
-        "displayName": "Customer",
-        "field": "customer"
     }
 ]
 
-const groupKeys = [
-  31, "New Zealand"
-]
-
 const valueCols = [
-    {
-        "id": "lastName",
-        "aggFunc": "first",
-        "displayName": "Last Name",
-        "field": "lastName"
-    },
-    {
-        "id": "firstName",
-        "aggFunc": "first",
-        "displayName": "First Name",
-        "field": "firstName"
-    },
     {
         "id": "accounts.balance",
         "aggFunc": "sum",
         "displayName": "Balance",
         "field": "balance"
+    },
+    {
+        "id": "crmInformation.totalContactsYtd",
+        "aggFunc": "sum",
+        "displayName": "totalContactsYtd",
+        "field": "totalContactsYtd"
     }
 ]
 
-exports({rowGroupCols, groupKeys, valueCols})
-
+exports({valueCols, groupToUse})
 */
