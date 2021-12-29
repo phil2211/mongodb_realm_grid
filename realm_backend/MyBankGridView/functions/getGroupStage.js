@@ -1,6 +1,7 @@
 exports = ({ valueCols, groupToUse }) => {
   const split = require("lodash/split");
   const last = require("lodash/last");
+  const merge = require("lodash/merge");
   
   let project = {};
   let groupId = {};
@@ -49,16 +50,10 @@ exports = ({ valueCols, groupToUse }) => {
     // see GridOptions.js in client code
     groupBody = {};
     valueCols.forEach(element => {
-      if (groupToUse[0].id === "customerId" || element.aggFunc !== "first") {
-        // if we have expectation for nested return, we need to nest them again because
-        // group will return un-nested values
-        project = Object.assign(project, convertDotPathToNestedObject(element.id, `$${last(split(element.id, '.'))}`));
-        groupBody = Object.assign(
-          groupBody,
-          {
-            [element.field]: {[`$${element.aggFunc}`]: `$${element.id}`}
-          });
-      }
+      // if we have expectation for nested return, we need to nest them again because
+      // group will return un-nested values
+      project = merge(project, convertDotPathToNestedObject(element.id, `$${last(split(element.id, '.'))}`))
+      groupBody = merge(groupBody,{[element.field]: {[`$${element.aggFunc}`]: `$${element.id}`}});
     });
     
     // set group by objects
@@ -66,7 +61,7 @@ exports = ({ valueCols, groupToUse }) => {
   }
 
   const pipeline = [
-    {"$group": Object.assign({"_id": groupId}, groupBody)},
+    {"$group": merge({"_id": groupId}, groupBody)},
     {"$set": project}
   ];
   

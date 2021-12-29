@@ -61,30 +61,40 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
  *
 
 const rowGroupCols= [
-    {
-        "id": "address.country",
-        "displayName": "Country",
-        "field": "country"
-    },
-    {
-        "id": "customerId",
-        "displayName": "Customer",
-        "field": "customer"
-    }
+  {
+    "id": "crmInformation.segmentation",
+    "displayName": "Segment",
+    "field": "segment"
+  },
+  {
+    "id": "age",
+    "displayName": "Age",
+    "field": "age"
+  },
+  {
+    "id": "customerId",
+    "displayName": "Customer",
+    "field": "customer"
+  }
 ]
 
 const groupKeys = [
 ]
 
 const valueCols = [
-    {
-        "id": "accounts.balance",
-        "aggFunc": "sum",
-        "displayName": "Balance",
-        "field": "balance"
-    }
+  {
+    "id": "accounts.balance",
+    "aggFunc": "sum",
+    "displayName": "Balance",
+    "field": "balance"
+  },
+  {
+    "id": "crmInformation.totalContactsYtd",
+    "aggFunc": "sum",
+    "displayName": "Total Contacts Ytd",
+    "field": "totalContactsYtd"
+  }
 ]
-
 
 exports(
   {
