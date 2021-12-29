@@ -1,15 +1,15 @@
 [
     {
+        "name": "getSortStagePrecompute",
+        "private": true
+    },
+    {
         "name": "updateTotalBalance",
         "private": true,
         "run_as_system": true
     },
     {
-        "name": "getSortStagePrecompute",
-        "private": true
-    },
-    {
-        "name": "resetPassword",
+        "name": "getSearch",
         "private": true
     },
     {
@@ -21,21 +21,9 @@
         "private": false
     },
     {
-        "name": "getGroupStage",
+        "name": "getGroupStagePrecompute",
         "private": true,
         "run_as_system": true
-    },
-    {
-        "name": "getSortStage",
-        "private": true
-    },
-    {
-        "name": "getMatchStage",
-        "private": true
-    },
-    {
-        "name": "getSearch",
-        "private": true
     },
     {
         "name": "createUserData",
@@ -46,7 +34,19 @@
         "private": false
     },
     {
-        "name": "getGroupStagePrecompute",
+        "name": "getSortStage",
+        "private": true
+    },
+    {
+        "name": "getMatchStage",
+        "private": true
+    },
+    {
+        "name": "resetPassword",
+        "private": true
+    },
+    {
+        "name": "getGroupStage",
         "private": true,
         "run_as_system": true
     }

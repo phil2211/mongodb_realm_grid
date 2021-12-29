@@ -1,6 +1,6 @@
 {
     "field_name": "getGridData",
-    "function_name": "getGridData",
+    "function_name": "getGridDataPrecompute",
     "input_type": {
         "properties": {
             "endRow": {
@@ -92,23 +92,6 @@
                 "items": {
                     "bsonType": "object",
                     "properties": {
-                        "accounts": {
-                            "bsonType": "object",
-                            "properties": {
-                                "balance": {
-                                    "bsonType": "decimal"
-                                },
-                                "name": {
-                                    "bsonType": "string"
-                                },
-                                "number": {
-                                    "bsonType": "string"
-                                },
-                                "type": {
-                                    "bsonType": "string"
-                                }
-                            }
-                        },
                         "address": {
                             "bsonType": "object",
                             "properties": {
@@ -236,6 +219,9 @@
                         },
                         "profession": {
                             "bsonType": "string"
+                        },
+                        "totalBalance": {
+                            "bsonType": "int"
                         }
                     },
                     "title": "customerSingleviewFlat"
