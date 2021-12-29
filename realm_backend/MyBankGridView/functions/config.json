@@ -1,5 +1,22 @@
 [
     {
+        "name": "updateTotalBalance",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getSortStagePrecompute",
+        "private": true
+    },
+    {
+        "name": "resetPassword",
+        "private": true
+    },
+    {
+        "name": "updateAge",
+        "private": true
+    },
+    {
         "name": "getGridData",
         "private": false
     },
@@ -9,23 +26,11 @@
         "run_as_system": true
     },
     {
+        "name": "getSortStage",
+        "private": true
+    },
+    {
         "name": "getMatchStage",
-        "private": true
-    },
-    {
-        "name": "getGridDataPrecompute",
-        "private": false
-    },
-    {
-        "name": "updateAge",
-        "private": true
-    },
-    {
-        "name": "getSortStagePrecompute",
-        "private": true
-    },
-    {
-        "name": "createUserData",
         "private": true
     },
     {
@@ -33,20 +38,15 @@
         "private": true
     },
     {
-        "name": "getSortStage",
+        "name": "createUserData",
         "private": true
+    },
+    {
+        "name": "getGridDataPrecompute",
+        "private": false
     },
     {
         "name": "getGroupStagePrecompute",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
-        "name": "updateTotalBalance",
         "private": true,
         "run_as_system": true
     }

@@ -1,34 +1,70 @@
-exports = ({valueCols, groupToUse}) => {
+exports = ({ valueCols, groupToUse }) => {
   const split = require("lodash/split");
   const last = require("lodash/last");
-  const upperFirst = require("lodash/upperFirst");
+  const merge = require("lodash/merge");
   
   let project = {};
   let groupId = {};
-  let groupBody = {};
-  let pipeline = [];
+  let groupBody = {}; 
   
   if (groupToUse[0].id === "customerId") {
-    pipeline.push({"$unset": "accounts"});
-    pipeline.push({"$set": {"accounts.balance": "$totalBalance"}});
+    // Use special grouping on Customer-Level to have multiple fields attached
+    project = {
+      customerId: "$_id.customerId",
+      lastName: "$_id.lastName",
+      firstName: "$_id.firstName",
+      age: "$_id.age",
+      crmInformation: {
+        segmentation: "$_id.segmentation",
+        totalContactsYtd: "$totalContactsYtd"
+      },
+      address: {
+        country: "$_id.country"
+      },
+      accounts: {
+        balance: "$balance"
+      }
+    }
+    
+    groupId = {
+      customerId: "$customerId",
+      lastName: "$lastName",
+      firstName: "$firstName",
+      age: "$age",
+      country: "$address.country",
+      segmentation: "$crmInformation.segmentation"
+    }
+    
+    groupBody = {
+      "balance": {
+        "$sum": "$accounts.balance"
+      },
+      "totalContactsYtd": {
+        "$sum": "$crmInformation.totalContactsYtd"
+      }
+    }
   } else {
     project = convertDotPathToNestedObject(groupToUse[0].id, `$_id.${last(split(groupToUse[0].id, '.'))}`);
+  
+    // create all valueColums to calculate by the aggFunc set in Grid
+    // see GridOptions.js in client code
     groupBody = {};
     valueCols.forEach(element => {
-      groupBody = Object.assign(
-        groupBody,
-        {
-          [`total${upperFirst(element.field)}`]: {[`$${element.aggFunc}`]: `$total${upperFirst(element.field)}`}
-        });
-      project = Object.assign(project, convertDotPathToNestedObject(element.id, `$total${upperFirst(element.field)}`));
+      // if we have expectation for nested return, we need to nest them again because
+      // group will return un-nested values
+      project = merge(project, convertDotPathToNestedObject(element.id, `$${last(split(element.id, '.'))}`))
+      groupBody = merge(groupBody,{[element.field]: {[`$${element.aggFunc}`]: `$${element.id}`}});
     });
     
     // set group by objects
     groupId = {[last(split(groupToUse[0].id, '.'))]: `$${groupToUse[0].id}`};
-    pipeline.push({"$group": Object.assign({"_id": groupId}, groupBody)});
-    pipeline.push({"$set": project});
   }
 
+  const pipeline = [
+    {"$group": merge({"_id": groupId}, groupBody)},
+    {"$set": project}
+  ];
+  
   return pipeline;
 };
 
@@ -44,11 +80,11 @@ function convertDotPathToNestedObject(path, value) {
 Testdata
 ========
 
-const groupToUse = [
+const groupToUse= [
     {
-        "id": "address.country",
-        "displayName": "Country",
-        "field": "country"
+        "id": "age",
+        "displayName": "Age",
+        "field": "age"
     }
 ]
 
@@ -58,9 +94,14 @@ const valueCols = [
         "aggFunc": "sum",
         "displayName": "Balance",
         "field": "balance"
+    },
+    {
+        "id": "crmInformation.totalContactsYtd",
+        "aggFunc": "sum",
+        "displayName": "totalContactsYtd",
+        "field": "totalContactsYtd"
     }
 ]
 
 exports({valueCols, groupToUse})
-
 */
