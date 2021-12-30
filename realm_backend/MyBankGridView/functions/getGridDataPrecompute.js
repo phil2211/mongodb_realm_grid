@@ -10,9 +10,9 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
 
   const agg = [];
   
-  // build different aggregation when using search
+  // using search
   if(searchText.length > 0) {
-    forEach(context.functions.execute('getSearch', {searchText, startRow, endRow}), (element) => agg.push(element));
+    forEach(context.functions.execute('getSearchWildcard', {searchText, startRow, endRow}), (element) => agg.push(element));
   }
   
   if(groupKeys.length > 0) {

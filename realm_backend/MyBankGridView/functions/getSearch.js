@@ -50,44 +50,6 @@ exports = function({searchText, startRow, endRow, valueCols}) {
      }
     }}
   );
-/*   
-  searchAgg.push(
-      { $unwind: {
-          path: "$accounts",
-          preserveNullAndEmptyArrays: false
-      }}
-    );
- 
-  const groupToUse = [
-    {
-        "id": "customerId",
-        "displayName": "Customer",
-        "field": "customer"
-    }];
-  forEach(context.functions.execute('getGroupStage', {valueCols, groupToUse}), (element) => searchAgg.push(element));
-  
-  searchAgg.push(
-    {$facet: {
-     rows: [{ $skip: startRow }, { $limit: endRow-startRow }],
-     rowCount: [{$count: 'lastRow'}]
-     //rowCount: [{ $replaceWith: "$$SEARCH_META" }, { $limit: 1 }]
-    }}
-  );
-  
-  searchAgg.push(
-    {$project: {
-     rows: 1,
-     query: JSON.stringify(searchAgg),
-     lastRow: {"$ifNull": [{$arrayElemAt: ["$rowCount.lastRow", 0]}, 0]}
-     //rowCount: {
-      //$arrayElemAt: [
-      // "$rowCount.count.lowerBound",
-       //0
-      //]
-     //}
-    }}    
-  );
-*/  
   return searchAgg;
 };
 
