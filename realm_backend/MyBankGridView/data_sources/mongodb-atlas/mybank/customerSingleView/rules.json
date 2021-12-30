@@ -30,6 +30,13 @@
             "apply_when": {
                 "%%user.custom_data.role": "regionManager"
             }
+        },
+        {
+            "name": "admin",
+            "query": {},
+            "apply_when": {
+                "%%user.custom_data.role": "admin"
+            }
         }
     ],
     "roles": [
