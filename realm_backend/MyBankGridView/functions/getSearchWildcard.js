@@ -25,6 +25,7 @@ exports = function({searchText, startRow, endRow, valueCols}) {
           text: {
            query: searchText,
            path: [
+             "firstName",
             {
              wildcard: 'address*'
             },
