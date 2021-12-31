@@ -52,10 +52,10 @@
                         "of": {
                             "number": "$guid",
                             "type": {"$choose": {"from": ["account", "loan", "depot"], "weights": [2, 1, 1]}},
-                            "balance": {"$numberDecimal": {"min": -100000, "max": 999999}},
-                            "name": {"$sentence": {"words": {"$integer": {"min": 0, "max": 5}}}}
+                            "balance": {"$numberDecimal": {"min": -9999, "max": 9999}},
+                            "description": {"$sentence": {"words": {"$integer": {"min": 1, "max": 5}}}}
                         },
-                        "number": {"$integer": {"min": 0, "max": 20}}
+                        "number": {"$integer": {"min": 1, "max": 20}}
                     } 
                 }
             },
