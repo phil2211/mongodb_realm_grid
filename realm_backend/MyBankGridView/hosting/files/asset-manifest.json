@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.17b8ac43.chunk.css",
-    "main.js": "/static/js/main.aaf1aa34.chunk.js",
-    "main.js.map": "/static/js/main.aaf1aa34.chunk.js.map",
+    "main.js": "/static/js/main.b70f8bc1.chunk.js",
+    "main.js.map": "/static/js/main.b70f8bc1.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.2816e6dd.js",
     "runtime-main.js.map": "/static/js/runtime-main.2816e6dd.js.map",
     "static/css/2.2d74ece0.chunk.css": "/static/css/2.2d74ece0.chunk.css",
@@ -11,13 +11,15 @@
     "index.html": "/index.html",
     "static/css/2.2d74ece0.chunk.css.map": "/static/css/2.2d74ece0.chunk.css.map",
     "static/css/main.17b8ac43.chunk.css.map": "/static/css/main.17b8ac43.chunk.css.map",
-    "static/js/2.ff45a3a0.chunk.js.LICENSE.txt": "/static/js/2.ff45a3a0.chunk.js.LICENSE.txt"
+    "static/js/2.ff45a3a0.chunk.js.LICENSE.txt": "/static/js/2.ff45a3a0.chunk.js.LICENSE.txt",
+    "static/media/ag-grid-logo.d4a5e8e0.png": "/static/media/ag-grid-logo.d4a5e8e0.png",
+    "static/media/react-logo.f153eb9f.png": "/static/media/react-logo.f153eb9f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.2816e6dd.js",
     "static/css/2.2d74ece0.chunk.css",
     "static/js/2.ff45a3a0.chunk.js",
     "static/css/main.17b8ac43.chunk.css",
-    "static/js/main.aaf1aa34.chunk.js"
+    "static/js/main.b70f8bc1.chunk.js"
   ]
 }

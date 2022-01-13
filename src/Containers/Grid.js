@@ -127,7 +127,7 @@ const Grid = ({ client }) => {
         </div>
         <div style={{margin: 10}}>
             <p>{`Total Results: ${formatNumber(totalRows)}`}</p>
-            <p>User: {user.id ? `${user.profile.name} (${user.providerType})` : "not logged in"}</p>
+            <p>User: {user.id ? `${user.profile.email} (${user.providerType})` : "not logged in"}</p>
             <p>{`Role: ${role}`}</p>
             <Button variant="primary" onClick={() => app.logOut()}>Logout</Button>
         </div>
