@@ -4,6 +4,6 @@
     "config": {
         "clusterName": "MyBank",
         "readPreference": "nearest",
-        "wireProtocolEnabled": false
+        "wireProtocolEnabled": true
     }
 }
