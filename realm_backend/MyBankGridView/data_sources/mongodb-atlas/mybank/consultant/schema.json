@@ -1,0 +1,29 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "int"
+        },
+        "email": {
+            "bsonType": "string"
+        },
+        "firstName": {
+            "bsonType": "string"
+        },
+        "lastName": {
+            "bsonType": "string"
+        },
+        "location": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "double"
+            }
+        },
+        "rating": {
+            "bsonType": "string"
+        },
+        "test": {
+            "bsonType": "string"
+        }
+    },
+    "title": "consultant"
+}
