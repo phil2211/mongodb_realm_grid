@@ -1,40 +1,6 @@
 [
     {
-        "name": "getGroupStagePrecompute",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getSearch",
-        "private": true
-    },
-    {
-        "name": "getSearchWildcard",
-        "private": true
-    },
-    {
-        "name": "getSortStage",
-        "private": true
-    },
-    {
-        "name": "resetPassword",
-        "private": true
-    },
-    {
         "name": "updateTotalBalance",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getGridDataPrecompute",
-        "private": false
-    },
-    {
-        "name": "getGridData",
-        "private": false
-    },
-    {
-        "name": "getGroupStage",
         "private": true,
         "run_as_system": true
     },
@@ -43,7 +9,15 @@
         "private": true
     },
     {
-        "name": "createUserData",
+        "name": "getGridDataPrecompute",
+        "private": false
+    },
+    {
+        "name": "getSearch",
+        "private": true
+    },
+    {
+        "name": "resetPassword",
         "private": true
     },
     {
@@ -51,12 +25,38 @@
         "private": true
     },
     {
+        "name": "getGroupStage",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getGroupStagePrecompute",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getSortStage",
+        "private": true
+    },
+    {
         "name": "insertRecord",
+        "private": false
+    },
+    {
+        "name": "getGridData",
         "private": false
     },
     {
         "name": "updateTotalBalance_",
         "private": true,
         "run_as_system": true
+    },
+    {
+        "name": "createUserData",
+        "private": true
+    },
+    {
+        "name": "getSearchWildcard",
+        "private": true
     }
 ]
