@@ -21,7 +21,7 @@
     "event_processors": {
         "FUNCTION": {
             "config": {
-                "function_name": "updateTotalBalance_"
+                "function_name": "updateTotalBalance"
             }
         }
     }
