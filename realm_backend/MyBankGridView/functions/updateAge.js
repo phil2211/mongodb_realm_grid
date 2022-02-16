@@ -1,5 +1,8 @@
 exports = function() {
+    // get cursor on the Atlas collection
     const collection = context.services.get("mongodb-atlas").db("mybank").collection("customerSingleView");
+
+    // update 
     const doc = collection.updateMany(
       {}, 
       [{ $set: 
