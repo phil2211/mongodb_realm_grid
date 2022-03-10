@@ -1,36 +1,6 @@
 [
     {
-        "name": "getGridData",
-        "private": false
-    },
-    {
-        "name": "getGridDataPrecompute",
-        "private": false
-    },
-    {
-        "name": "getGroupStage",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "getSearch",
-        "private": true
-    },
-    {
         "name": "getSortStage",
-        "private": true
-    },
-    {
-        "name": "createUserData",
-        "private": true
-    },
-    {
-        "name": "getGroupStagePrecompute",
-        "private": true,
-        "run_as_system": true
-    },
-    {
-        "name": "resetPassword",
         "private": true
     },
     {
@@ -39,7 +9,21 @@
         "run_as_system": true
     },
     {
-        "name": "getSearchWildcard",
+        "name": "getSearch",
+        "private": true
+    },
+    {
+        "name": "getGroupStage",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getGroupStagePrecompute",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "updateAge",
         "private": true
     },
     {
@@ -47,11 +31,27 @@
         "private": true
     },
     {
-        "name": "updateAge",
+        "name": "resetPassword",
+        "private": true
+    },
+    {
+        "name": "getSearchWildcard",
         "private": true
     },
     {
         "name": "insertRecord",
+        "private": false
+    },
+    {
+        "name": "createUserData",
+        "private": true
+    },
+    {
+        "name": "getGridData",
+        "private": false
+    },
+    {
+        "name": "getGridDataPrecompute",
         "private": false
     }
 ]

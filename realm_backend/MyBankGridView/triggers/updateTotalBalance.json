@@ -11,13 +11,17 @@
         "database": "mybank",
         "collection": "customerSingleView",
         "service_name": "mongodb-atlas",
-        "match": {},
+        "match": {
+            "updateDescription.updatedFields.accounts": {
+                "$exists": true
+            }
+        },
         "project": {},
         "full_document": true,
         "full_document_before_change": false,
         "unordered": true
     },
-    "disabled": true,
+    "disabled": false,
     "event_processors": {
         "FUNCTION": {
             "config": {
