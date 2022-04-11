@@ -9,6 +9,8 @@ exports = async ({ startRow, endRow, rowGroupCols=[], groupKeys=[], valueCols=[]
   const groupToUse = rowGroupCols.slice(groupKeys.length, groupKeys.length + 1);
 
   const agg = [];
+
+  console.log("Hello TX Group");
   
   // using search
   if(searchText.length > 0) {
